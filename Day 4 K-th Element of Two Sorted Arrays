@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+int kthElement(vector<int> &arr1, vector<int>& arr2, int n, int m, int b){
+    // Write your code here
+     int i = 0, j = 0, k = 0;
+     int arr3[n+m];
+      while(i < n){
+      arr3[k++] = arr1[i++];
+    }
+       
+      while(j < m){
+      arr3[k++] = arr2[j++];
+    }
+    
+      sort(arr3, arr3+n+m);
+
+      return arr3[b-1];
+}
