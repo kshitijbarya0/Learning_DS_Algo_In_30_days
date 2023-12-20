@@ -1,0 +1,16 @@
+void tower(int n,int source, int auxiliary,int destination,vector<vector<int>>&ans){
+    if(n == 0){
+        // ans.push_back({source,destination});
+        return;
+    }
+    tower(n-1,source,destination,auxiliary,ans);
+    ans.push_back({source,destination});
+    tower(n-1,auxiliary,source,destination,ans);
+}
+vector<vector<int>> towerOfHanoi(int n)
+{
+    //    Write your code here.
+    vector<vector<int>>a;
+    tower(n,1,2,3,a);
+    return a;
+}
