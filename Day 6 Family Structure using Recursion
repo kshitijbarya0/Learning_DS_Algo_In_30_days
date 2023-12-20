@@ -1,0 +1,20 @@
+bool findnthnode(int n,long long int k){
+	if(n == 1 && k == 1){
+		return 0;
+	}
+	if(k%2==0){
+		return !findnthnode(n-1, k/2);
+	}else{
+		return findnthnode(n-1, (k+1)/2);
+	}
+}
+string kthChildNthGeneration(int n, long long int k)
+{
+	// Write your code here	
+	bool ans = findnthnode(n,k);
+	if(ans){
+		return "Female";
+	}else{
+		return "Male";
+	}
+}
