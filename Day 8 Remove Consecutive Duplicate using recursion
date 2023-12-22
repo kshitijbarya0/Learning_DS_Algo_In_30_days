@@ -1,0 +1,18 @@
+void remov(int start,int end, string &ans, string &s){
+    if(start>=end){
+        return;
+    }
+    if(ans.back()!=s[start]){
+        ans = ans + s[start];
+    }
+    remov(start+1,end,ans,s);
+}
+string removeDuplicate(string &s)
+{
+    // Write your code here
+    string ans = "";
+    int n = s.length();
+    ans = ans + s[0];
+    remov(1,n,ans,s);
+    return ans;
+}
