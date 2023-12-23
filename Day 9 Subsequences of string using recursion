@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+void callfu(int start, string str, vector<string>&ans,string output){
+   if(str.size()<=start){
+		if(output.size()!=0){
+			ans.push_back(output);
+		}
+		return;
+	}
+	callfu(start+1,str,ans,output);
+	char a = str[start];
+	output.push_back(a);
+	callfu(start+1,str,ans,output);
+}
+vector<string> subsequences(string str){
+	
+	// Write your code here
+	int start = 0;
+	vector<string> ans;
+	string output;
+	callfu(start,str,ans,output);
+	return ans;
+}
