@@ -1,0 +1,19 @@
+void backtrack(vector<vector<int>> &output, vector<int> &current, vector<int> &ARR, int remain, int start) {
+    if (remain < 0) return;
+    else if (remain == 0) output.push_back(current);
+    else {
+        for (int i = start; i < ARR.size(); i++) {
+            current.push_back(ARR[i]);
+            backtrack(output, current, ARR, remain - ARR[i], i); // Use i instead of i + 1
+            current.pop_back();
+        }
+    }
+}
+ 
+vector<vector<int>> combSum(vector<int> &ARR, int B) {
+    vector<vector<int>> output;
+    vector<int> current;
+    sort(ARR.begin(), ARR.end());
+    backtrack(output, current, ARR, B, 0);
+    return output;
+}
