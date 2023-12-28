@@ -1,0 +1,24 @@
+#include <bits/stdc++.h> 
+void solv(int count, int pos,string &temp,vector<string>&ans,string&str){
+    if(pos == str.size()){
+        if(count == 0){
+            ans.push_back(temp);
+        }else{
+            ans.push_back(temp+count);
+        }
+        return;
+    }
+    if(count>0){
+        solv(0,pos+1,temp+count+str[pos],ans,str);
+    }else{
+        solv(0,pos+1,temp+str[pos],ans,str);
+    }
+    solv(count+1,pos+1,temp,ans,str);
+}
+
+vector < string > findAbbr(string & str) {
+    // Write your code here.
+    vector<string>ans;
+    solv(0,0,"",ans,str);
+    return ans;
+}
