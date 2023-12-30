@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+long long MOD = 1e9+7;
+
+int solve(int n, vector<int>&dp){
+    // base case
+    if(n<0) return 0;
+    if(n==0) return 1;
+
+    // recurrance relation
+    if(dp[n] != -1) return dp[n] % MOD;
+    dp[n] =  solve(n-1, dp) + solve(n-2, dp);
+    return dp[n] % MOD;
+}
+
+int countDistinctWays(int n) {
+    vector<int>dp(n+1, -1);
+    return solve(n,dp);
+}
