@@ -1,17 +1,40 @@
-#include<bits/stdc++.h>
-int kthElement(vector<int> &arr1, vector<int>& arr2, int n, int m, int b){
-    // Write your code here
-     int i = 0, j = 0, k = 0;
-     int arr3[n+m];
-      while(i < n){
-      arr3[k++] = arr1[i++];
+#include <bits/stdc++.h> 
+int findKthElement(vector<int> &arr1, vector<int> &arr2, int k){
+    // Write your code here.
+    int i = 0;
+    int j = 0;
+    int index = 0;
+    while(i<arr1.size() && j<arr2.size()){
+        if(index+1 < k){     
+          if(arr1[i] < arr2[j]){  
+                i++;         
+            }  
+           else{
+               j++; 
+           } 
+            index++;   
+         } 
+       else {    
+            if(arr1[i] < arr2[j]){ 
+               return arr1[i];     
+            }      
+            else return arr2[j];   
+         }      
     }
-       
-      while(j < m){
-      arr3[k++] = arr2[j++];
+    while(i<arr1.size()){
+        if(index+1 == k){
+            return arr1[i];
+        }
+        i++;
+        index++;
+    }
+    while(j<arr2.size()){
+        if(index+1 == k){
+            return arr2[j];
+        }
+        j++;
+        index++;
     }
     
-      sort(arr3, arr3+n+m);
-
-      return arr3[b-1];
+    
 }
