@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+int LCS(int index,int Prev_index,int arr[],int n, vector<vector<int>> &DP){
+    if(index == n) return 0;
+     if(DP[index][Prev_index+1]!=-1) return DP[index][Prev_index+1];
+    // not take 
+    int len = 0 + LCS(index+1,Prev_index,arr,n,DP);
+    if(Prev_index == -1 || arr[index]>arr[Prev_index]){
+        len = max(len,1+LCS(index+1,index,arr,n,DP));
+    }
+    return DP[index][Prev_index+1] = len;
+}
+
+
+int longestIncreasingSubsequence(int arr[], int n)
+{
+     vector<vector<int>>DP(n,vector<int>(n+1,-1));
+     return LCS(0,-1,arr,n,DP);
+}
