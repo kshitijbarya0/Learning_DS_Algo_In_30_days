@@ -1,0 +1,53 @@
+/*
+    Time Complexity: O(N^2)
+    Space complexity: O(N)
+    
+    where ‘N’ is the length of String ‘Str’.
+    
+*/
+
+int helper(string &str, int index, int n, int del) 
+{
+    // Base case: if index reaches the end, we will return our deletion operations.
+    if (index == n) 
+    {
+        return del;
+    }
+    
+    int ans;
+
+    // If current character is 'a', then add it to our answer and call at index+1.
+    if (str[index] == 'a') 
+    {
+        ans = helper(str, index + 1, n, del);
+    }
+
+    // If current character is 'b', then we have two options.
+    else 
+    {
+        int count = 0;
+
+        // Counting the number of 'a' ahead.
+        for (int i = index + 1; i < str.size(); i++) 
+        {
+            if (str[i] == 'a') 
+            {
+                count++;
+            }
+        }
+
+        ans = min(del + count, helper(str, index + 1, n, del + 1));
+    }
+
+    // Returning the updated answer.
+    return ans;
+}
+
+int minDeletions(string &str) 
+{
+    // Calling helper function
+    int ans = helper(str, 0, str.length(), 0);
+
+    // Return the final ans.
+    return ans;
+}
