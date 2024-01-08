@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+
+void dfs(int i,string &s,string temp,unordered_set<string> &hashmap,vector<string> &ans){
+    if(i == s.size()){
+        temp.pop_back();
+        ans.push_back(temp);
+        return;
+    }
+    string word;
+    for(int j=i;j<s.size();j++){
+        if(hashmap.count(word+=s[j])){
+            dfs(j+1,s,temp+word+" ",hashmap,ans);
+        }
+    }
+}
+vector<string> wordBreak(string &s, vector<string> &dictionary){
+    vector<string> ans;
+    unordered_set<string> hashmap(dictionary.begin(),dictionary.end());
+    dfs(0,s,"",hashmap,ans);
+    return ans;
+}
+
