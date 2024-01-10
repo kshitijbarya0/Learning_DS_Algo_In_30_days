@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+int findNumberOfLIS(vector<int> &a) {
+    int prev, curr, n = a.size(), maxi = 1, i, ans = 0;
+    vector<int> dp(n, 1), cnt(n, 1);
+    for(curr=0; curr<n; curr++) {
+        for(prev=0; prev<curr; prev++) {
+            if(a[prev] < a[curr] && 1 + dp[prev] > dp[curr]) {
+                dp[curr] = 1 + dp[prev];
+                cnt[curr] = cnt[prev];
+            }
+            else if(a[prev] < a[curr] && 1 + dp[prev] == dp[curr]) {
+                cnt[curr] += cnt[prev];
+            }
+        }
+        maxi = max(maxi, dp[curr]);
+    }
+    for(i=0; i<n; i++) {
+        if(dp[i] == maxi) ans += cnt[i];
+    }
+    return ans;
+}
