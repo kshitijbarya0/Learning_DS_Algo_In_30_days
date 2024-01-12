@@ -1,0 +1,28 @@
+bool ispalidrom(int start, int end, string s) {
+  while (start <= end) {
+    if (s[start++] != s[end--]) return false;
+  }
+  return true;
+}
+
+void func(int idx, string s, vector < string > & path, vector < int > & subsize) {
+  if (idx == s.size()) {
+    subsize.push_back(path.size() - 1);
+    return;
+  }
+
+  for (int i = idx; i < s.size(); ++i) {
+    if (ispalidrom(idx, i, s)) {
+      path.push_back(s.substr(idx, i - idx + 1));
+      func(i + 1, s, path, subsize);
+      path.pop_back();
+    }
+  }
+}
+int palindromePartitioning(string s) {
+  vector < string > path;
+  vector < int > subsize;
+  func(0, s, path, subsize);
+  sort(subsize.begin(), subsize.end());
+  return subsize[0];
+}
