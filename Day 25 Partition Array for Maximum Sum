@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+int solve(int index, int k, vector < int > & num, vector < int > & dp) {
+  int n = num.size();
+  if (index == n)
+    return 0;
+  int maxi = INT_MIN;
+  int maxians = INT_MIN;
+  int len = 0;
+  if (dp[index] != -1)
+    return dp[index];
+  for (int j = index; j < min(n, index + k); j++) {
+    len++;
+    maxi = max(maxi, num[j]);
+    int ans = len * maxi + solve(j + 1, k, num, dp);
+    maxians = max(maxians, ans);
+  }
+  return dp[index] = maxians;
+}
+
+int tab(vector < int > & num, int k) {
+  int n = num.size();
+  vector < int > dp(n + 1, 0);
+  dp[n] = 0;
+  for (int index = n - 1; index >= 0; index--) {
+    int maxi = INT_MIN;
+    int maxians = INT_MIN;
+    int len = 0;
+    for (int j = index; j < min(n, index + k); j++) {
+      len++;
+      maxi = max(maxi, num[j]);
+      int ans = len * maxi + dp[j + 1];
+      maxians = max(maxians, ans);
+    }
+    dp[index] = maxians;
+  }
+  return dp[0];
+}
+int maximumSubarray(vector < int > & num, int k)
+{
+  // Write your code here.
+  // int n = num.size();
+  // vector<int>dp(n+1, -1);
+  // return solve(0, k , num, dp);
+  return tab(num, k);
+}
