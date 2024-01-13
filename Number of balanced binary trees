@@ -1,0 +1,23 @@
+int countBalancedBinaryTree(int n)
+{
+    //    For storing the result of previous two heights.
+    int prevOne = 1, prevTwo = 1;
+
+    //    All calculations need to done modulo 1e9+7.
+    const int MOD = 1e9 + 7;
+
+    //    Iterate till n.
+    for (int i = 2; i <= n; i++)
+    {
+        //    Calculate the answer for the current height.
+        int currentHeight = ((2LL * prevOne * prevTwo) % MOD + (1LL * prevOne * prevOne) % MOD) % MOD;
+        
+        //    Change the values of the previous two levels.
+        prevTwo = prevOne;
+        prevOne = currentHeight;
+
+    }
+
+    //    Return the value of the last level.
+    return prevOne;
+}
