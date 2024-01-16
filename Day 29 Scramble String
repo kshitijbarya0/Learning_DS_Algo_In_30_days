@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+unordered_map<string,bool> mp;
+bool solve(string s, string r){
+    //base condition
+    if(s.compare(r)==0){
+        return true; //both strings are exactly same
+    }
+    if(s.length()<=1){
+        return false;
+    }
+    string temp; //since variables 'a' and 'b' are changing, hence we define the key acc to them only.
+    temp.append(s);
+    temp.push_back(' ');
+    temp.append(r);
+    if(mp.find(temp) != mp.end()){
+        return mp[temp];
+    }
+    
+    
+    int n=s.length();
+    bool flag=false;
+    for(int i=1;i<n;i++){
+        
+       if((solve(s.substr(0,i),r.substr(n-i,i)) &&  solve(s.substr(i,n-i),r.substr(0,n-i))) || ( solve(s.substr(0,i),r.substr(0,i)) && solve(s.substr(i,n-i),r.substr(i,n-i)))){
+           flag=true;
+           break;
+       }
+    }
+    mp[temp]=flag;
+    return flag;
+}
+bool isScramble(string s, string r)
+{
+    if(s.length() != r.length()){
+        return false;
+    }
+    if(s.empty() && r.empty()){
+        return true;
+    }
+    mp.clear();
+    return solve(s,r);
+}
